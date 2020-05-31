@@ -121,3 +121,24 @@ Prefix sum algorithm takes $O(n)$ time to perform m number of queries to find ra
 
 $$A[i,j]=A[j]-A[i-1]$$
 Prefix sum algorithm takes O(n) to calculate the prefix sum array, and take O(1) to respond to an query.
+
+## DFS and BFS
+
+### DFS
+1. preorder: node -> left -> right
+2. inorder: left -> node -> right
+3. postorder: left -> right -> node
+
+```py
+# preorder
+[root.val]+preorder(root.left)+preorder(root.right) if root else []
+
+# inorder
+inorder(root.left)+[root.val]+inorder(root.right) if root else []
+
+# postorder
+postorder(root.left)+postorder(root.right)+[root.val] if root else []
+```
+
+### BFS
+iterations with the queue

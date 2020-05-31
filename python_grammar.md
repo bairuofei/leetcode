@@ -85,7 +85,15 @@ d["a"]+=1
 
 默认升序;
 - list.sort(key=func)仅为list设计，在原list上进行修改。 *list.sort()没有返回值*，直接在原list上进行修改
-- sorted(List,key=func,Reverse=True)可以接收任何可迭代对象，并*返回一个修改后的列表*
+- sorted(iterable,key=func,Reverse=True)可以接收任何可迭代对象，并*返回一个修改后的列表*
+```py
+# key指定根据哪个字段对列表元素进行排序
+key=lambda 元素： 元素[字段索引]
+
+# list排序同时保留下标信息
+a=[1,2,3,4,5]
+b=sorted(enumerate(a),key=lambda x: x[1])
+```
 key=func表示在每一个对象使用func处理之后进行排序
 
 # list
@@ -230,4 +238,32 @@ str.isdigit() # reutrn boolean
 str.isalpha() 
 
 str.isalnum() # 是否仅为数字和字母的组合
+```
+
+## python中的真值
+
+> https://juejin.im/post/5da18984e51d4577fa2b01b7
+
+Python3中判断为假的值有：
+- False
+- 所有数值类型的零值。int,float,double
+- 空序列空集合空映射
+- 定义了__bool__或__len__并返回False或0的用户自定义类的实例
+- None
+
+
+## lambda expression
+```py
+lambda args1[,args2,...]: expression
+# example
+sum=lambda x,y: x+y
+res=sum(5,6)
+```
+lambda expression返回值为一个函数，可以作为函数使用，也可以作为某些函数的参数使用。
+
+## map function
+```py
+# Return an iterator that applies function to every item of iterable, yielding the results
+# with many iterables, the iterator stops when the shortest iterable is exhausted.
+map(fun,iter,...)
 ```
