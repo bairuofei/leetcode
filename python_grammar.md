@@ -100,7 +100,7 @@ key=func表示在每一个对象使用func处理之后进行排序
 ```py
 list.append(x)
 list.extend(iterable)
-list.insert(i,x)
+list.insert(i,x) # insert x at index i, no return value, in place insert.
 list.remove(x)
 list.pop([i])
 list.count(x)
@@ -266,4 +266,47 @@ lambda expression返回值为一个函数，可以作为函数使用，也可以
 # Return an iterator that applies function to every item of iterable, yielding the results
 # with many iterables, the iterator stops when the shortest iterable is exhausted.
 map(fun,iter,...)
+```
+
+## list insert
+```py
+# index 为插入元素的期望下标。无返回值。
+list.insert(index, obj)
+```
+
+## binary search index
+```py
+(low+high)//2==(high-low)//2+low
+```
+
+## heapq
+```py
+import heapq
+a=[2,4,5,3,7,5,4,1]
+b=heapq.heapify(a)
+
+# heappush的可以不是数字，而是可以比较的数学对象。目前，对于包含数字，字符的元组，list都可以进行比较。本身没有数值大小含义的对象无法进行比较(待考察）。
+heapq.heappush(a,num)
+```
+
+## bisect 数组二分查找算法
+> 用于在有序数组中插入新数据，使数组依然保持有序
+
+下面几个函数用于寻找插入点的下标
+```py
+import bisect
+# 在a中找到x的合适插入点，返回插入点的下标i。如果x在a中已经存在，则将元素插入到已存在元素之前（左边）
+bisect.bisect_left(a,x,lo=0,hi=len(a))
+
+# bisect_right和bisect相同。即若x在a中已经存在，则将元素插入到已存在元素之后（右边）
+bisect.bisect(a,x,lo=0,hi=len(a))
+bisect.bisect_right(a,x,lo=0,hi=len(a))
+```
+下面的函数用于直接执行插入操作
+```py
+# 将x插入到一个有序序列a中，并维持其有序。left和right的含义与之前相同。
+# 注意搜索插入下标是O(log n)，而实际执行插入操作是O(n)
+bisect.insort_left(a,x,lo=0,hi=len(a))
+bisect.insort_right(a,x,lo=0,hi=len(a))
+bisect.insort(a,x,lo=0,hi=len(a))
 ```

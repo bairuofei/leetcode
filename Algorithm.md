@@ -26,7 +26,7 @@ kruskal算法可以找到分离子图中的最小生成树
 1. 将起始节点cost设置为0，其他所以节点的cost设置为Inf
 2. 将起始节点加入queue中
 3. 取出队列queue的所有节点中，cost值最小的节点$q$，考察该节点的所有后继节点$q^{'}$的权值：if $cost(q)+cost(q,q^')<cost(q^')$，则$cost(q^')=cost(q)+cost(q,q^')$.（这个过程称为relaxation）
-   -     Add $q^'$ to queue.
+   -     Add $q^{'}$ to queue.
 
 ## heap
 保持complete属性很重要：
@@ -142,3 +142,43 @@ postorder(root.left)+postorder(root.right)+[root.val] if root else []
 
 ### BFS
 iterations with the queue
+
+### string matching
+Rabin-kap Algorithm
+
+![image-20200619220713226](Md_Pictures/Algorithm/image-20200619220713226.png)
+
+
+
+rolling hash function
+
+![image-20200619221356079](Md_Pictures/Algorithm/image-20200619221356079.png)
+
+如果hash function过于简单，则可能出现与其他pattern冲突的情况-> spurious hits
+
+如果pattern的长度为$m$, 序列总长度为$n$，则最差的时间复杂度为$O(mn)$， 意味着每一个位置都会有冲突；最好的时间复杂度为$O(n-m+1)$，意味着hash function没有冲突。
+
+因此需要一个strong hash function
+
+![image-20200619222311569](Md_Pictures/Algorithm/image-20200619222311569.png)
+
+
+
+![image-20200619230238239](Md_Pictures/Algorithm/image-20200619230238239.png)
+
+
+
+ 使用mod来防止过高的hash值
+
+
+
+
+
+
+
+
+
+
+
+
+
