@@ -54,7 +54,7 @@ used to create a heap, but time complexity is $O(n)$
 
 ### heapq
 ```py
-import heapq
+import heapq # 注意heap不在collections中， deque属于collections
 heapq.heappush(heap,item)
 heapq.heappop(heap)
 heapq.heappushpop(heap,item)
@@ -170,15 +170,42 @@ rolling hash function
 
  使用mod来防止过高的hash值
 
+## find duplicated number
+重点在于如何根据重复数据来构造一个包含环的路径，而且重复元素要位于这个环的起点位置
+
+用数字来作为下一个迭代的下标，可以有效应对重复元素不只出现两次的情况。
+
+## 迭代函数的返回值
+迭代函数的返回值设置为想要维持的全局计数结果，可以避免使用list这种引用数据类型。
+
+## KMP pattern search algorithm
+Knuth Morris Pratt Pattern Searching.
+
+- naive pattern search algorithm: time complexity $O(m(n-m+1))$.
+- KMP time complexity $O(n)$
+
+KMP uses degenerating property (pattern having same sub-patterns appearing more than once in the pattern) of the pattern and improves the worst case complexity.
+
+Preprocessing pattern and prepare an integer array lps[]. （longest prefix suffix)
+
+![image-20200707214438769](Md_Pictures/Algorithm/image-20200707214438769.png)
+
+![image-20200707214700876](Md_Pictures/Algorithm/image-20200707214700876.png)
+
+算法原理在于：
+
+若在匹配过程中发现不匹配的情况，那么就通过lps中存储的值，将pattern的考察下标修改为上一个重复前缀出现的位置。如果不匹配发生在某一次前缀重复出现之后，那么pattern的考察下标将会移动到上一个前缀重复的位置；如果不匹配发生在普通的过程中，那么pattern的考察下标将会直接移动到pattern的首部。
+
+![image-20200707220932334](Md_Pictures/Algorithm/image-20200707220932334.png)
 
 
-
-
-
-
-
-
-
-
+## deque
+```py
+from collections import deque
+queue=deque(iterable_type)
+queue.append(value)
+queue.popleft()
+```
+> 从空deque中pop元素会引发IndexError
 
 

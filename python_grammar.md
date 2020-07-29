@@ -102,7 +102,7 @@ list.append(x)
 list.extend(iterable)
 list.insert(i,x) # insert x at index i, no return value, in place insert.
 list.remove(x)
-list.pop([i])
+list.pop([i]) # 返回从列表中移除的对象. 若list为空，会报错
 list.count(x)
 list.clear()
 list.reverse()
@@ -113,6 +113,19 @@ stack: 使用pop和append可以将list作为stack
 queue:
 
 list.index(item): 返回item在list中第一次出现时的小标，若不存在则抛出ValueError
+
+## python list index
+list[start:end:step]: 可以提取从start到end，以step为步长的元素列表
+```py
+a=[i for i in range(10)]
+b=a[::1]
+c=a[::-1]
+```
+
+## python 条件表达式
+```py
+res = a if a > b else b  #条件放在了中间
+```
 
 ## tuple: 
 immutable, usually contain heterogeneous elements
@@ -152,7 +165,7 @@ reversed(seq):反转迭代器，seq可以是tuple,string,list,range
 list,字典属于引用类型
 数字，tuple,string属于值类型。
 
-## dict
+# dict
 dict的key可以用num和str,tuple也可以，但是tuple中的元素只能是num,str或tuple。
 否则含有可变元素的tuple不可以作为dict的key。
 ```py
@@ -189,7 +202,7 @@ for key, value in dict.items():
 for q,a in zip(questions,answers):
 ```
 
-## collections.Counter([iterable-or-mapping])
+# collections.Counter([iterable-or-mapping])
 ```py
 import collections
 c=collections.Counter([iterable])
@@ -310,3 +323,52 @@ bisect.insort_left(a,x,lo=0,hi=len(a))
 bisect.insort_right(a,x,lo=0,hi=len(a))
 bisect.insort(a,x,lo=0,hi=len(a))
 ```
+
+## 下标迭代
+用Python进行list的下标迭代时，需要注意，如果下标从正迭代到了负，并不会报错。因为负下标是从list尾端向前索引的。
+所以注意在使用的时候要对index是否小于0进行判断。
+
+## string.digits
+```py
+import string
+# string模块中的常量
+# 数字0~9
+string.digits
+# 所有字母（大小写）
+string.ascii_letters
+# 所有小写字母
+string.lowercase
+# 可打印字符的字符串
+string.printable
+# 所有标点
+string.punctuation
+# 所有大写字母
+string.uppercase
+```
+
+# python3 成员变量
+```py
+class TestClass(object):
+  classval1 = 100   #类变量
+  def __init__(self):
+    self.memval2 = 200   #成员变量
+    self.memfuntion2(600) # memfuntion2中定义的成员变量也是类实例的成员变量，因其出现在构造函数中
+  def memfuntion1(self,val = 400):
+    localval3 = 300    #函数内部的局部变量
+    self.nmval4 = val
+    self.nmval5=500
+  def memfuntion2(self,val = 600):
+    self.memval6 = val
+    self.memval7=700
+if __name__ == '__main__':
+    inst = TestClass()
+    print(TestClass.classval1)
+    print(inst.classval1)
+    print(inst.memval2)
+    #print(inst.localval3) # 这三条语句不可用，因为不属于成员变量
+    #print(inst.nmval4)
+    #print(inst.nmval5)
+    print(inst.memval6) # 由于memfuntion出现在构造函数中，因此定义的成员变量有效
+    print(inst.memval7)
+```
+> 疑问是：定义在成员方法中的，前缀self.variable与普通的variable有什么不同？
